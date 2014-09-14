@@ -58,33 +58,27 @@
                 centre = canvasSize/2,
                 radius = canvasSize*0.8/2,
                 s = Snap('#svg'),
-                s2 = Snap('#svg2'),
                 path = "",
-                arc = s.path(path), 
-                arc2 = s2.path(path),   
+                arc = s.path(path),    
                 startY = centre-radius,
                 runBtn = document.getElementById('run'),
                 percDiv = document.getElementById('percent'),
-                input = document.getElementById('input')
-                input2 = document.getElementById('input2');
+                input = document.getElementById('input');
 
                 input.onkeyup = function(evt) {
-                  if(isNaN(input.value))
-                  if(isNaN(input2.value)) {
+                  if(isNaN(input.value)) {
                     input.value = '';
                   }
                 };
 
                 runBtn.onclick = function() {
                   run(input.value/100);
-                  run(input2.value/100);
                 };
 
                 function run(percent) {
                   var endpoint = percent*360;
                   Snap.animate(0, endpoint,   function (val) {
                     arc.remove();
-                    arc2.remove();
 
                     var d = val,
                     dr = d-90;
@@ -95,13 +89,7 @@
                     path = "M"+centre+","+startY+" A"+radius+","+radius+" 0 "+largeArc+",1 "+endx+","+endy;
 
                     arc = s.path(path);
-                    arc2 = s2.path(path);
                     arc.attr({
-                      stroke: '#73ADBA',
-                      fill: 'none',
-                      strokeWidth: 40
-                    });
-                    arc2.attr({
                       stroke: '#73ADBA',
                       fill: 'none',
                       strokeWidth: 40
@@ -111,8 +99,7 @@
                   }, 2000, mina.easeinout);  
                 }
 
-                run(input.value/100),
-                run(input2.value/100);
+                run(input.value/100);
 
       }
       </script>
@@ -148,19 +135,11 @@
            </div>
           </div>
           <div class="row">
-           <div class="large-6 pull-2 columns">
+           <div class="large-8 push-2 columns">
              <div class="container">
                <div id="percent"></div>
                <svg id="svg"></svg>
                <p><label for="perc-input">67% of scoliosis sufferers go undiagnosed</label><input style="display:none;" maxlength="2" type="text" id="input" value="67"/></p>
-               <a class="btn" id="run"></a>
-             </div>
-           </div>
-            <div class="large-6 columns">
-             <div class="container">
-               <div id="percent"></div>
-               <svg id="svg2"></svg>
-               <p><label for="perc-input">Scoliosis accounts for 80% of spinal deformities.</label><input style="display:none;" maxlength="2" type="text" id="input2" value="80"/></p>
                <a class="btn" id="run"></a>
              </div>
            </div>
