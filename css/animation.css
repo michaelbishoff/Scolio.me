@@ -1,0 +1,66 @@
+@import url(http://fonts.googleapis.com/css?family=Lato);
+body {
+  background: #efefef;
+}
+
+.container {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  margin: auto;
+  font-family: 'Lato', sans-serif;
+  color: #444;
+}
+
+#percent, #svg, #svg2 {
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#percent {
+  line-height: 20px;
+  height: 20px;
+  width:90%;
+  top: 160px;
+  font-size: 60px;
+  text-align: center;
+  opacity: 0.8
+}
+
+p, .btn {
+  position: relative;
+  left: 375px;
+  width: 200px;
+  display: block;
+  text-transform: uppercase;
+  font-size: 23px;
+  top: 83px;
+}
+
+.btn {
+  display:none;
+  text-align: center;
+  background: #5fc2af;
+  color: #fff;
+  width: 120px;
+  height: 37px;
+  line-height: 37px;
+  cursor: pointer;
+}
+
+input {
+  display:none;
+  border: 0;
+  outline: 0;
+  border-bottom: 1px solid #eee;
+  width: 30px;
+  font-family: helvetica;
+  font-size: 24px;
+  font-family: 'Lato', sans-serif;
+  background: transparent;
+  
+}
+

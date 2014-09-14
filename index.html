@@ -1,1 +1,184 @@
-Hello World
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scolio</title>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="css/animation.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:Thin100,300,300italic,400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+      <script src="js/vendor/modernizr.js"></script>
+      <script type="text/javascript" src="js/d3.min.js"></script>
+      <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/53148/snap.svg-min.js"></script>
+  </head>
+  <body>
+     <!-- <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
+        <ul class="title-area">
+          <li class="name">
+            <h1><a href="#">Scolio</a></h1>
+          </li>-->
+          <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+        <!--  <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+        </ul>
+
+        <section class="top-bar-section"> -->
+          <!-- Right Nav Section -->
+          <!--<ul class="right">
+            <li><a href="#">About</a></li>
+            <li class="has-dropdown">
+              <a href="#">Right Button Dropdown</a>
+              <ul class="dropdown">
+                <li><a href="#">First link in dropdown</a></li>
+                <li class="active"><a href="#">Active link in dropdown</a></li>
+              </ul>
+            </li>
+          </ul> -->
+
+          <!-- Left Nav Section -->
+        <!--  <ul class="left">
+            <li><a href="#">About</a></li>
+          </ul>
+        </section>
+      </nav>-->
+
+      <script>
+
+      function replaceContentInContainer(target, source) {
+        document.getElementById(target).innerHTML = document.getElementById(source).innerHTML;
+      }
+
+      function replace_and_animate() {
+
+        // replace first
+        replaceContentInContainer('target', 'replace_target');
+
+        // then animate
+                var canvasSize = 350,
+                centre = canvasSize/2,
+                radius = canvasSize*0.8/2,
+                s = Snap('#svg'),
+                s2 = Snap('#svg2'),
+                path = "",
+                arc = s.path(path), 
+                arc2 = s2.path(path),   
+                startY = centre-radius,
+                runBtn = document.getElementById('run'),
+                percDiv = document.getElementById('percent'),
+                input = document.getElementById('input')
+                input2 = document.getElementById('input2');
+
+                input.onkeyup = function(evt) {
+                  if(isNaN(input.value))
+                  if(isNaN(input2.value)) {
+                    input.value = '';
+                  }
+                };
+
+                runBtn.onclick = function() {
+                  run(input.value/100);
+                  run(input2.value/100);
+                };
+
+                function run(percent) {
+                  var endpoint = percent*360;
+                  Snap.animate(0, endpoint,   function (val) {
+                    arc.remove();
+                    arc2.remove();
+
+                    var d = val,
+                    dr = d-90;
+                    radians = Math.PI*(dr)/180,
+                    endx = centre + radius*Math.cos(radians),
+                    endy = centre + radius * Math.sin(radians),
+                    largeArc = d>180 ? 1 : 0;  
+                    path = "M"+centre+","+startY+" A"+radius+","+radius+" 0 "+largeArc+",1 "+endx+","+endy;
+
+                    arc = s.path(path);
+                    arc2 = s2.path(path);
+                    arc.attr({
+                      stroke: '#73ADBA',
+                      fill: 'none',
+                      strokeWidth: 40
+                    });
+                    arc2.attr({
+                      stroke: '#73ADBA',
+                      fill: 'none',
+                      strokeWidth: 40
+                    });
+                    percDiv.innerHTML =    Math.round(val/360*100) +'%';
+
+                  }, 2000, mina.easeinout);  
+                }
+
+                run(input.value/100),
+                run(input2.value/100);
+
+      }
+      </script>
+      
+      <div id="target">
+        <div class="row">
+          <div class="large-12 columns">
+            <div class="hide-for-small svg-container">
+              <img src="img/scolio.svg">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-8 push-2 columns">
+            <h3 class="text-center" style="font-family:'lato' sans-serif; text-transform:uppercase;">1 in 10 adolescents suffers from Scoliosis.</h3>
+            <a onClick="replace_and_animate()"><h3 class="text-center" style="font-family:'lato' sans-serif; text-transform:uppercase;"><strong>Take a closer look. </strong></h3></a>
+          </div>
+          <div class="large-6 push-1 columns" style="top:0.5em; height:5.25em;">
+          </div>
+        </div>
+      </div>
+      
+      <div  class="typeform-widget" data-url="https://melissamahan.typeform.com/to/hU4Uus" data-text="Scolio" style="width:100%; height:395px; overflow:hidden; box-shadow:1px 2px 1px #73ADBA;"></div>
+      <script>(function(){var qs,js,q,s,d=document,gi=d.getElementById,ce=d.createElement,gt=d.getElementsByTagName,id='typef_orm',b='https://s3-eu-west-1.amazonaws.com/share.typeform.com/';if(!gi.call(d,id)){js=ce.call(d,'script');js.id=id;js.src=b+'widget.js';q=gt.call(d,'script')[0];q.parentNode.insertBefore(js,q)}})()</script>
+
+    
+      <div id="replacements" style="display:none">
+        <span id="replace_target">
+          <div class="row">
+           <div class="large-12 columns" style="height=5em">
+           	<br>
+           	<br>
+           </div>
+          </div>
+          <div class="row">
+           <div class="large-6 pull-2 columns">
+             <div class="container">
+               <div id="percent"></div>
+               <svg id="svg"></svg>
+               <p><label for="perc-input">67% of scoliosis sufferers go undiagnosed</label><input style="display:none;" maxlength="2" type="text" id="input" value="67"/></p>
+               <a class="btn" id="run"></a>
+             </div>
+           </div>
+            <div class="large-6 columns">
+             <div class="container">
+               <div id="percent"></div>
+               <svg id="svg2"></svg>
+               <p><label for="perc-input">Scoliosis accounts for 80% of spinal deformities.</label><input style="display:none;" maxlength="2" type="text" id="input2" value="80"/></p>
+               <a class="btn" id="run"></a>
+             </div>
+           </div>
+          </div>
+        </span>
+      </div>
+    
+
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation/foundation.js"></script>
+    <script src="js/foundation/foundation.topbar.js"></script>
+
+    <script>
+      $(document).foundation();
+    </script>
+
+  </body>
+  <footer>
+  </footer>
+</html>
